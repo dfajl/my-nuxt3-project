@@ -9,10 +9,11 @@ interface User {
 export const useUserStore = defineStore('user', () => {
 	const user = ref<User | null>(null);
 	const isLoggedIn = ref(false);
-	const number = ref(666);
+	const number = ref(33);
 	const setUser = (newUser: User) => {
 		user.value = newUser;
 		isLoggedIn.value = true;
+		number.value = 666;
 	};
 
 	const logout = () => {

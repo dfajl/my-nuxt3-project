@@ -1,20 +1,23 @@
 <template>
 	<div>
 		<NuxtRouteAnnouncer />
-		<nav>
-			<NuxtLink to="/">Главная</NuxtLink>
-			<NuxtLink to="/welcome">Страница Приветствия</NuxtLink>
-		</nav>
+		<UINavBar />
 		<NuxtPage />
 	</div>
 </template>
 
-<script setup>
-// Здесь можно добавлять реактивные переменные и функции, если это необходимо
+<script setup lang="ts">
+	import UINavBar from '@/components/UI/UINavBar.vue';
 </script>
 
-<style scoped>
-nav {
-	margin-bottom: 20px;
-}
+<style>
+	body {
+		font-family: 'Montserrat', sans-serif;
+		background: #bccdcfb3;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
 </style>
