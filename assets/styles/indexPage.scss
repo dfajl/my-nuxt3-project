@@ -1,0 +1,18 @@
+h1 {
+	color: #42b983;
+}
+.main_container {
+	width: 80%;
+	position: relative;
+	z-index: 1;
+	margin: 0 auto;
+}
+.main_background {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	filter: brightness(0.6);
+	object-fit: cover;
+}
