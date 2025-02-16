@@ -6,6 +6,16 @@ h1 {
 	position: relative;
 	z-index: 1;
 	margin: 0 auto;
+	text-align: center;
+	margin-top: 100px;
+
+	.nuxt_logo_container {
+		width: 30%;
+		margin: 0 auto;
+		img {
+			width: 50%;
+		}
+	}
 }
 .main_background {
 	width: 100%;

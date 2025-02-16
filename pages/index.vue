@@ -1,7 +1,13 @@
 <template>
 	<div class="main_container">
-		<h1>Добро пожаловать на главную страницу!</h1>
-		<p>Это ваше приложение на Nuxt!</p>
+		<h1>Welcome Nuxt 3 page!</h1>
+		<div class="nuxt_logo_container">
+			<img
+				class="nuxt_logo"
+				src="@/assets/images/icons/icon-nuxt.svg"
+				alt="Логотип Nuxt"
+			/>
+		</div>
 	</div>
 	<img
 		class="main_background overlay"
