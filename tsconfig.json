@@ -7,6 +7,8 @@
       "@/*": ["*"]
     },
     "moduleResolution": "node",
-    "types": ["vue", "nuxt"]
+    "types": ["vue", "nuxt"],
+    "module": "esnext",
+    "target": "es2017"
   }
 }

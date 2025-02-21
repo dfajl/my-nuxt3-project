@@ -4,8 +4,15 @@
 	</div>
 </template>
 
-<script setup>
-	// Здесь можно добавлять реактивные переменные и функции, если это необходимо
+<script setup lang="ts">
+	// пример использоания параметров маршрута
+	const route = useRoute();
+	console.log(route);
+
+	// пример использоания middleware
+	definePageMeta({
+		middleware: 'example',
+	});
 </script>
 
 <style scoped>

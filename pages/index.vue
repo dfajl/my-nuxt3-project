@@ -17,18 +17,7 @@
 </template>
 
 <script setup lang="ts">
-	import { useUserStore } from '@/stores/exampleStore';
 	import mainBackground from '@/assets/images/backgrounds/background_main.jpg';
-
-	console.log(mainBackground);
-
-	const userStore = useUserStore();
-
-	// Получаем данные из Store
-	const user = computed(() => userStore.user);
-	const isLoggedIn = computed(() => userStore.isLoggedIn);
-	const number = computed(() => userStore.number);
-	console.log(number.value);
 </script>
 
 <style scoped lang="scss">
