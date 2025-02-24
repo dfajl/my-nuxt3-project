@@ -3,12 +3,14 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "jsx": "preserve",
     "paths": {
       "@/*": ["*"]
     },
+    "strict": true,
     "moduleResolution": "node",
-    "types": ["vue", "nuxt"],
+    "types": ["vue", "nuxt", "@nuxt/types", "@types/node"],
     "module": "esnext",
-    "target": "es2017"
-  }
+    "target": "es2017",
+  },
 }
