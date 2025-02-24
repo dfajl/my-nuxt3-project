@@ -1,11 +1,15 @@
 <template>
 	<nav>
-		<NuxtLink to="/">Main</NuxtLink>
-		<NuxtLink to="/user-list" activeClass="active">User list</NuxtLink>
-		<!-- <NuxtLink to="/[name]" activeClass="active">User info</NuxtLink> -->
-		<NuxtLink to="/user-comment" activeClass="active"
-			>User comment</NuxtLink
-		>
+		<div class="left-anchor">
+			<NuxtLink to="/">Main</NuxtLink>
+		</div>
+
+		<div class="right-anchors">
+			<NuxtLink to="/user-list" activeClass="active">User list</NuxtLink>
+			<NuxtLink to="/user-comment" activeClass="active"
+				>User comment</NuxtLink
+			>
+		</div>
 	</nav>
 </template>
 <script setup lang="ts"></script>

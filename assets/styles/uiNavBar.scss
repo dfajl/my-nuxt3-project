@@ -1,6 +1,6 @@
 nav {
 	display: flex;
-	justify-content: start;
+	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
 	gap: 30px;
@@ -9,10 +9,17 @@ nav {
 	position: relative;
 	z-index: 1;
 
-	a:first-child {
-		margin-right: 60%;
+	.left-anchor a {
 		background: #00bfff;
 	}
+
+	.right-anchors {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+	}
+
 
 	a {
 		background: #98e5ff;

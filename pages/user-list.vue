@@ -1,20 +1,11 @@
 <template>
-	<div class="user-list_wrappepr">
-		<div
-			v-if="status === 'success'"
-			class="user-item"
-			v-for="user in users"
-			:key="user.id"
-			@click="navigateToUser(user.id)"
-		>
-			{{ user.name }}
-		</div>
-		<span v-else>Loading...</span>
-	</div>
+	<UserList v-if="status === 'success' && users.length" :users="users" />
+	<div class="loading-users">Loading...</div>
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
+	import UserList from '@/components/UserList.vue';
 	import type { User } from '@/types/Users';
 
 	const router = useRouter();
@@ -37,12 +28,16 @@
 			}
 		}
 	});
-
-	const navigateToUser = (id: string | number) => {
-		router.push(`/user-profile/${id}`);
-	};
 </script>
 
-<style scoped lang="scss">
-	@import '@/assets/styles/userListPage.scss';
+<style lang="scss" scoped>
+	.loading-users {
+		width: 100%;
+		height: 200px;
+		padding: 50px;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 </style>
