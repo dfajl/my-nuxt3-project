@@ -1,5 +1,5 @@
 <template>
-	<UserList v-if="status === 'success' && users.length" :users="users" />
+	<UserList v-if="status === 'success' && users?.length" :users="users" />
 	<UILoading v-else message="Users loading..." />
 </template>
 

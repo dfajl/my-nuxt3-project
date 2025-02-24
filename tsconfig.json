@@ -5,12 +5,12 @@
     "baseUrl": ".",
     "jsx": "preserve",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./*"]
     },
     "strict": true,
     "moduleResolution": "node",
-    "types": ["vue", "nuxt", "@nuxt/types", "@types/node"],
+    "types": ["@nuxt/types", "@types/node"],
     "module": "esnext",
-    "target": "es2017",
+    "target": "esnext",
   },
 }
