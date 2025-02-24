@@ -1,63 +1,48 @@
 <template>
 	<div class="user-list_wrappepr">
 		<div
+			v-if="status === 'success'"
 			class="user-item"
 			v-for="user in users"
-			key="user.id"
-			v-if="status === 'success'"
-			@click="navigateToUser(user.name)"
+			:key="user.id"
+			@click="navigateToUser(user.id)"
 		>
 			{{ user.name }}
 		</div>
-		<span v-esle>Loading...</span>
+		<span v-else>Loading...</span>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
+	import type { User } from '@/types/Users';
 
 	const router = useRouter();
 
 	const {
 		data: users,
 		status,
-		execute,
-	} = await useFetch('https://jsonplaceholder.typicode.com/users', {
+		error,
+	} = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
 		lazy: true,
+		key: 'users',
 	});
 
-	const navigateToUser = (name: string) => {
-		const editedParam = name.replace(/\s+/g, '_');
-		router.push(`/user-profile/${editedParam}`);
+	watch(error, (value: any) => {
+		if (value) {
+			alert('Sorry. Something went wrong!');
+			router.push('/');
+			if (value instanceof Error) {
+				console.error('Ошибка API:', value.message);
+			}
+		}
+	});
+
+	const navigateToUser = (id: string | number) => {
+		router.push(`/user-profile/${id}`);
 	};
 </script>
 
 <style scoped lang="scss">
-	.user-list_wrappepr {
-		margin: 0 auto;
-		padding: 50px;
-		width: 70%;
-		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		flex-direction: column;
-		gap: 10px;
-		.user-item {
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			width: 100%;
-			height: 50px;
-			border: 1px solid grey;
-			cursor: pointer;
-			transition: 0.3s;
-			border-radius: 10px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-			&:hover {
-				background: #00000043;
-				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-			}
-		}
-	}
+	@import '@/assets/styles/userListPage.scss';
 </style>

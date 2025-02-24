@@ -1,0 +1,54 @@
+.user-card {
+    background: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 80%;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+
+    .user-name {
+        font-size: 22px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .user-username {
+        font-size: 16px;
+        color: #777;
+        margin-bottom: 10px;
+    }
+    
+    .user-email {
+        font-size: 14px;
+        color: #555;
+    }
+    
+    .user-info {
+        p {
+            margin: 5px 0;
+        }
+    
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    }
+    
+    .user-address,
+    .user-company {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+    
+        h3 {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #444;
+        }
+    }
+    
+}
+
