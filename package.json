@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/vue": "^1.0.31",
     "sass": "^1.85.0",
-    "sass-loader": "^16.0.4"
+    "sass-loader": "^16.0.4",
+    "vue-tsc": "^2.1.10"
   }
 }

@@ -1,11 +1,12 @@
 <template>
 	<UserList v-if="status === 'success' && users.length" :users="users" />
-	<div class="loading-users">Loading...</div>
+	<UILoading v-else message="Users loading..." />
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
 	import UserList from '@/components/UserList.vue';
+	import UILoading from '@/components/UI/UILoading.vue';
 	import type { User } from '@/types/Users';
 
 	const router = useRouter();

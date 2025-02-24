@@ -35,7 +35,7 @@
 <script setup lang="ts">
 	import type { User } from '@/types/Users';
 
-	defineProps<{
+	const props = defineProps<{
 		user: User;
 	}>();
 </script>
