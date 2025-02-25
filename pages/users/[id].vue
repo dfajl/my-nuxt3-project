@@ -18,7 +18,7 @@
 	);
 
 	if (!currentUser) {
-		router.push('/user-list');
+		router.push('/users');
 	}
 </script>
 

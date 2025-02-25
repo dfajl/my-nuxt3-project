@@ -1,18 +1,18 @@
 <template>
 	<nav>
 		<div class="left-anchor">
-			<NuxtLink to="/">Main</NuxtLink>
+			<UILink pageName="Main" path="/" />
 		</div>
 
 		<div class="right-anchors">
-			<NuxtLink to="/user-list" activeClass="active">User list</NuxtLink>
-			<NuxtLink to="/user-comment" activeClass="active"
-				>User comment</NuxtLink
-			>
+			<UILink pageName="Users" path="/users" activeClass="active" />
+			<UILink pageName="Comments" path="/comments" activeClass="active" />
 		</div>
 	</nav>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import UILink from '@/components/UI/UILink.vue';
+</script>
 <style scoped lang="scss">
 	@import '@/assets/styles/uiNavBar.scss';
 </style>

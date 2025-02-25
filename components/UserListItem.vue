@@ -20,7 +20,7 @@
 	const router = useRouter();
 
 	const navigateToUser = (id: string | number) => {
-		router.push(`/user-profile/${id}`);
+		router.push(`/users/${id}`);
 	};
 </script>
 
