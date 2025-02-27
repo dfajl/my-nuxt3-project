@@ -1,6 +1,6 @@
 <template>
 	<CommonList
-		:component="UserListItem"
+		component-uniq-name="users"
 		v-if="status === 'success' && users?.length"
 		:data="users"
 	/>
@@ -10,7 +10,6 @@
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
 	import CommonList from '@/components/CommonList.vue';
-	import UserListItem from '@/components/UserListItem.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
 	import type { User } from '@/types/FetchedData';
 

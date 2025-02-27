@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-	import type { Comment } from '@/types/Comments';
+	import type { Comment } from '@/types/FetchedData';
 
 	const props = defineProps<{
 		comment: Comment;

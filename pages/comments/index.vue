@@ -1,6 +1,6 @@
 <template>
 	<CommonList
-		:component="CommentListItem"
+		component-uniq-name="comments"
 		:data="comments"
 		v-if="status === 'success' && comments?.length"
 	/>
@@ -11,7 +11,6 @@
 	import { useRouter } from 'vue-router';
 	import type { Comment } from '@/types/FetchedData';
 	import CommonList from '@/components/CommonList.vue';
-	import CommentListItem from '@/components/CommentListItem.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
 
 	const router = useRouter();

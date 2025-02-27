@@ -1,14 +1,15 @@
 <template>
 	<div class="list_wrapper">
-		<component :is="component" :items="data" />
+		<ListItem :component-uniq-name="componentUniqName" :items="data" />
 	</div>
 </template>
 
 <script setup lang="ts">
 	import type { Comment, User } from '@/types/FetchedData';
+	import ListItem from '@/components/ListItem.vue';
 
 	const props = defineProps<{
-		component: Component;
+		componentUniqName: string;
 		data: User[] | Comment[];
 	}>();
 </script>
