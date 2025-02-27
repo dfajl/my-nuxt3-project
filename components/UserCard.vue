@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-	import type { User } from '@/types/Users';
+	import type { User } from '@/types/FetchedData';
 
 	const props = defineProps<{
 		user: User;

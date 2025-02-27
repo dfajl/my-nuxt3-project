@@ -1,3 +1,4 @@
+// =================================== Users
 export type Geo = {
 	lat: string;
 	lng: string;
@@ -27,3 +28,14 @@ export type User = {
 	website: string;
 	company: Company;
 };
+
+// =================================== Comments
+export type Comment = {
+	postId: number;
+	id: number;
+	name: string;
+	email: string;
+	body: string;
+};
+
+// =================================== Posts

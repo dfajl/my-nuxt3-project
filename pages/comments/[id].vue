@@ -1,24 +1,25 @@
 <template>
-	<!-- <div v-if="currentUser" :user="currentUser"> comment with id:{{ route.params.id }} </div>
-	<span v-else>Nothing to render!</span> -->
+	<CommentCard v-if="currentComment" :comment="currentComment" />
+	<span v-else>Nothing to render!</span>
 </template>
 
 <script setup lang="ts">
+	import CommentCard from '@/components/CommentCard.vue';
+	import type { Comment } from '@/types/Comments';
+
 	const route = useRoute();
 	const router = useRouter();
 
 	// достаем данные из кэша
-	/* const { data: users } = useNuxtData('users'); */
+	const { data: comments } = useNuxtData('comments');
 
-	/* const currentUser: User = users.value?.find(
-		(user: User) => String(user.id) === route.params.id,
+	const currentComment: Comment = comments.value?.find(
+		(comment: Comment) => String(comment.id) === route.params.id,
 	);
 
-	if (!currentUser) {
-		router.push('/user-list');
-	} */
+	if (!currentComment) {
+		router.push('/comments');
+	}
 </script>
 
-<style scoped lang="scss">
-	/* @import '@/assets/styles/userProfile.scss'; */
-</style>
+<style scoped lang="scss"></style>

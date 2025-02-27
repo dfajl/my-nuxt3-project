@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="user-item"
-		v-for="user in users"
+		v-for="user in items"
 		:key="user.id"
 		@click="navigateToUser(user.id)"
 	>
@@ -10,11 +10,11 @@
 </template>
 
 <script setup lang="ts">
-	import type { User } from '@/types/Users';
+	import type { User } from '@/types/FetchedData';
 	import { useRouter } from 'vue-router';
 
 	const props = defineProps<{
-		users: User[];
+		items: User[];
 	}>();
 
 	const router = useRouter();

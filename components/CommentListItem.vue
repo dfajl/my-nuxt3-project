@@ -1,23 +1,28 @@
 <template>
-	<div class="comment-item" v-for="comment in comments" :key="comment.id">
-		<!-- @click="navigateToUser(user.id)" -->
-		Comment ID - {{ comment.id }} <br />
+	<div
+		class="comment-item"
+		v-for="comment in items"
+		:key="comment.id"
+		@click="navigateToComment(comment.id)"
+	>
+		Comment ID - {{ comment.id }}
+		<br />
 		Comment email - {{ comment.email }}
 	</div>
 </template>
 
 <script setup lang="ts">
-	import type { Comment } from '@/types/Comments';
+	import type { Comment } from '@/types/FetchedData';
 	import { useRouter } from 'vue-router';
 
 	const props = defineProps<{
-		comments: Comment[];
+		items: Comment[];
 	}>();
 
 	const router = useRouter();
 
-	const navigateToUser = (id: string | number) => {
-		router.push(`/users/${id}`);
+	const navigateToComment = (id: string | number) => {
+		router.push(`/comments/${id}`);
 	};
 </script>
 

@@ -1,15 +1,15 @@
 <template>
 	<div class="list_wrapper">
-		<CommentListItem :comments="comments" />
+		<component :is="component" :items="data" />
 	</div>
 </template>
 
 <script setup lang="ts">
-	import type { Comment } from '@/types/Comments';
-	import CommentListItem from '@/components/CommentListItem.vue';
+	import type { Comment, User } from '@/types/FetchedData';
 
 	const props = defineProps<{
-		comments: Comment[];
+		component: Component;
+		data: User[] | Comment[];
 	}>();
 </script>
 

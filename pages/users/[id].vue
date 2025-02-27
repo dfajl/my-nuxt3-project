@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-	import type { User } from '@/types/Users';
+	import type { User } from '@/types/FetchedData';
 	import UserCard from '@/components/UserCard.vue';
 
 	const route = useRoute();
@@ -22,6 +22,4 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import '@/assets/styles/userProfile.scss';
-</style>
+<style scoped lang="scss"></style>

@@ -1,6 +1,7 @@
 <template>
-	<CommentList
-		:comments="comments"
+	<CommonList
+		:component="CommentListItem"
+		:data="comments"
 		v-if="status === 'success' && comments?.length"
 	/>
 	<UILoading v-else message="Comments loading..." />
@@ -8,8 +9,9 @@
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
-	import type { Comment } from '@/types/Comments';
-	import CommentList from '@/components/CommentList.vue';
+	import type { Comment } from '@/types/FetchedData';
+	import CommonList from '@/components/CommonList.vue';
+	import CommentListItem from '@/components/CommentListItem.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
 
 	const router = useRouter();
@@ -19,7 +21,7 @@
 		middleware: 'example',
 	});
 
-	const limit = ref(5);
+	const limit = ref(10);
 	const startIndex = ref(0);
 
 	const {

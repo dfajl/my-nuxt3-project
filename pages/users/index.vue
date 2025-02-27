@@ -1,13 +1,18 @@
 <template>
-	<UserList v-if="status === 'success' && users?.length" :users="users" />
+	<CommonList
+		:component="UserListItem"
+		v-if="status === 'success' && users?.length"
+		:data="users"
+	/>
 	<UILoading v-else message="Users loading..." />
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
-	import UserList from '@/components/UserList.vue';
+	import CommonList from '@/components/CommonList.vue';
+	import UserListItem from '@/components/UserListItem.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
-	import type { User } from '@/types/Users';
+	import type { User } from '@/types/FetchedData';
 
 	const router = useRouter();
 
