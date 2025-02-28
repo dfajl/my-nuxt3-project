@@ -7,6 +7,7 @@
 		<div class="right-anchors">
 			<UILink pageName="Users" path="/users" activeClass="active" />
 			<UILink pageName="Comments" path="/comments" activeClass="active" />
+			<UILink pageName="Posts" path="/posts" activeClass="active" />
 		</div>
 	</nav>
 </template>

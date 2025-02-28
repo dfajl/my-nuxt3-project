@@ -1,31 +1,30 @@
 <template>
 	<CommonList
-		component-uniq-name="users"
-		component-uniq-type="username"
-		v-if="status === 'success' && users?.length"
-		:data="users"
+		component-uniq-name="posts"
+		component-uniq-type="userId"
+		:data="postsData"
+		v-if="postsData?.length"
 	/>
-	<UILoading v-else message="Users loading..." />
+	<UILoading v-else message="Posts loading..." />
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
-	import type { User } from '@/types/FetchedData';
+	import type { Post } from '@/types/FetchedData';
 
 	const router = useRouter();
 
-	const {
-		data: users,
-		status,
-		error,
-	} = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
-		lazy: true,
-		key: 'users',
+	const postsData = useState<Post[]>('posts');
+
+	await callOnce(async () => {
+		postsData.value = await $fetch(
+			'https://jsonplaceholder.typicode.com/posts',
+		);
 	});
 
-	watch(error, (value: any) => {
+	/* watch(error, (value: any) => {
 		if (value) {
 			alert('Sorry. Something went wrong!');
 			router.push('/');
@@ -33,7 +32,7 @@
 				console.error('Ошибка API:', value.message);
 			}
 		}
-	});
+	}); */
 </script>
 
 <style lang="scss" scoped>

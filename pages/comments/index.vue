@@ -1,6 +1,7 @@
 <template>
 	<CommonList
 		component-uniq-name="comments"
+		component-uniq-type="postId"
 		:data="comments"
 		v-if="status === 'success' && comments?.length"
 	/>

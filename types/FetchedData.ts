@@ -39,3 +39,7 @@ export type Comment = {
 };
 
 // =================================== Posts
+export type Post = Omit<Comment, 'postId' | 'name' | 'email'> & {
+	userId: number;
+	title: string;
+};
