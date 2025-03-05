@@ -43,3 +43,12 @@ export type Post = Omit<Comment, 'postId' | 'name' | 'email'> & {
 	userId: number;
 	title: string;
 };
+
+// =================================== Photos
+export type Photo = {
+	albumId: number;
+	id: number;
+	title: string;
+	url: string;
+	thumbnailUrl: string;
+};

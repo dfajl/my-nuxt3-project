@@ -8,6 +8,7 @@
 			<UILink pageName="Users" path="/users" activeClass="active" />
 			<UILink pageName="Comments" path="/comments" activeClass="active" />
 			<UILink pageName="Posts" path="/posts" activeClass="active" />
+			<UILink pageName="Photos" path="/photos" activeClass="active" />
 		</div>
 	</nav>
 </template>

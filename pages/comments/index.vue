@@ -13,6 +13,7 @@
 	import type { Comment } from '@/types/FetchedData';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
+	import { apiFetch } from '@/utils/customUseFetch';
 
 	const router = useRouter();
 
@@ -36,7 +37,26 @@
 					_limit: limit.value,
 					_start: startIndex.value,
 				},
+				onRequest({ options }) {
+					console.log('Request_params:', options.params);
+				},
+				onResponse({ response }) {
+					console.log('Response:', response);
+				},
 			}),
+		/*	
+			Вариант использования кастомного $fetch. 
+			Вроде, работает, но
+			при ошибке в запросе почему-то вызывается дважды.
+		*/
+
+		/* apiFetch('/comments', {
+				params: {
+					_limit: limit.value,
+					_start: startIndex.value,
+				},
+			}), */
+
 		{
 			watch: [limit, startIndex],
 		},

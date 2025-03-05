@@ -2,37 +2,44 @@
 	<CommonList
 		component-uniq-name="posts"
 		component-uniq-type="userId"
-		:data="postsData"
-		v-if="postsData?.length"
+		:data="posts"
+		v-if="posts?.length"
 	/>
 	<UILoading v-else message="Posts loading..." />
 </template>
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
+	import { usePostsState } from '@/stores/postsStore';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
-	import type { Post } from '@/types/FetchedData';
 
 	const router = useRouter();
+	const { posts, error } = usePostsState();
 
-	const postsData = useState<Post[]>('posts');
+	/*
+		const posts = useState<Post[]>('posts');
+		await callOnce(async () => {
+			posts.value = await $fetch(
+				'https://jsonplaceholder.typicode.com/posts',
+			);
+		});
+	*/
 
-	await callOnce(async () => {
-		postsData.value = await $fetch(
-			'https://jsonplaceholder.typicode.com/posts',
-		);
-	});
+	/* 
+		Это пример из доки.
+		Я же вынес это в компосабл. 
+		Т.к. callOnce в компосабле вызывается синхронно, то теперь const { posts } надо юзать с проверками на наличие значения.
 
-	/* watch(error, (value: any) => {
+		Если же юзать await callOnce в script setup, то это делает под капотом Suspense.
+	*/
+
+	watch(error, (value) => {
 		if (value) {
 			alert('Sorry. Something went wrong!');
 			router.push('/');
-			if (value instanceof Error) {
-				console.error('Ошибка API:', value.message);
-			}
 		}
-	}); */
+	});
 </script>
 
 <style lang="scss" scoped>
