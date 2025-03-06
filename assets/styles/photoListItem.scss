@@ -1,0 +1,18 @@
+.photos-item {
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	width: 90%;
+	min-height: 80px;
+	border: 1px solid grey;
+	cursor: pointer;
+	transition: 0.3s;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	&:hover {
+		background: #00000043;
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+	}
+}

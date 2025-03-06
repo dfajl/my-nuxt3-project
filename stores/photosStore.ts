@@ -5,18 +5,31 @@ export const usePhotosStore = defineStore('photosStore', () => {
 	const photos: Ref<Photo[]> = ref([]);
 	const limit = ref(5);
 	const startIndex = ref(0);
+	const fetchError: Ref<null | Error> = ref(null);
 
 	async function fetchPhotos() {
-		const data = await $fetch<Photo[]>(
-			'https://jsonplaceholder.typicode.com/photos',
-			{
-				params: {
-					_limit: limit.value,
-					_start: startIndex.value,
+		try {
+			const data = await $fetch<Photo[]>(
+				'https://jsonplaceholder.typicode.com/photos',
+				{
+					params: {
+						_limit: limit.value,
+						_start: startIndex.value,
+					},
 				},
-			},
-		);
-		photos.value = data;
+			);
+			console.log('CALLED_OK');
+			photos.value = data;
+		} catch (error: unknown) {
+			console.log('CALLED');
+			if (error instanceof Error) {
+				fetchError.value = error;
+			}
+		}
+	}
+
+	function incrementStartIndex(incrementedValue: number) {
+		startIndex.value = incrementedValue + startIndex.value;
 	}
 
 	watch(startIndex, (value) => {
@@ -25,5 +38,12 @@ export const usePhotosStore = defineStore('photosStore', () => {
 		}
 	});
 
-	return { photos, limit, startIndex, fetchPhotos };
+	return {
+		photos,
+		limit,
+		startIndex,
+		fetchError,
+		fetchPhotos,
+		incrementStartIndex,
+	};
 });

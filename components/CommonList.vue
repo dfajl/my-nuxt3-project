@@ -5,19 +5,17 @@
 			:key="item.id"
 			:component-uniq-name="componentUniqName"
 			:item="item"
-			:component-uniq-type="componentUniqType"
 		/>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import type { Comment, User, Post } from '@/types/FetchedData';
+	import type { Comment, User, Post, Photo } from '@/types/FetchedData';
 	import ListItem from '@/components/ListItem.vue';
 
 	const props = defineProps<{
-		componentUniqName: string;
-		componentUniqType: 'username' | 'postId' | 'userId';
-		data: User[] | Comment[] | Post[];
+		componentUniqName: 'users' | 'comments' | 'posts' | 'photos';
+		data: User[] | Comment[] | Post[] | Photo[];
 	}>();
 </script>
 

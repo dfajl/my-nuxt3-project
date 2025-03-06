@@ -52,3 +52,6 @@ export type Photo = {
 	url: string;
 	thumbnailUrl: string;
 };
+
+// =================================== for training
+export type Recorded = Record<keyof Photo, boolean>;
