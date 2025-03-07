@@ -37,12 +37,6 @@
 					_limit: limit.value,
 					_start: startIndex.value,
 				},
-				onRequest({ options }) {
-					console.log('Request_params:', options.params);
-				},
-				onResponse({ response }) {
-					console.log('Response:', response);
-				},
 			}),
 		/*	
 			Вариант использования кастомного $fetch. 

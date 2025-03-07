@@ -1,4 +1,6 @@
 export const apiFetch = $fetch.create({
+	/* TO DO! Почему-то, если запрос падает с ошибкой, то эти обработчики срабатывают два раза */
+
 	baseURL: 'https://jsonplaceholder.typicode.com',
 
 	onRequest({ request }) {

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import type { Photo } from '@/types/FetchedData';
 
 export const usePhotosStore = defineStore('photosStore', () => {
+	console.log('PINIA_PHOTOS_INIT');
 	const photos: Ref<Photo[]> = ref([]);
 	const limit = ref(5);
 	const startIndex = ref(0);
@@ -21,7 +22,7 @@ export const usePhotosStore = defineStore('photosStore', () => {
 			console.log('CALLED_OK');
 			photos.value = data;
 		} catch (error: unknown) {
-			console.log('CALLED');
+			console.log('CALLED_ERROR');
 			if (error instanceof Error) {
 				fetchError.value = error;
 			}

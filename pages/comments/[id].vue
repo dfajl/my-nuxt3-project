@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 	import CommentCard from '@/components/CommentCard.vue';
-	import type { Comment } from '@/types/Comments';
+	import type { Comment } from '@/types/FetchedData';
 
 	const route = useRoute();
 	const router = useRouter();

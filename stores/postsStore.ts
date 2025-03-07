@@ -19,7 +19,6 @@ export const usePostsState = () => {
 				console.error('Ошибка API:', err.message);
 			}
 		}
-
 		/* posts.value = await apiFetch('/posts'); */
 		/* Вариант использования кастомного $fetch. 
 			Вроде, работает, но
@@ -30,6 +29,7 @@ export const usePostsState = () => {
 	if (error.value) {
 		/* 
 			Принудительный вызов фетча на случай, если при первом запуске упала ошибка
+			и мы пошли сюда повторно
 		*/
 		fetchPosts();
 	} else {
