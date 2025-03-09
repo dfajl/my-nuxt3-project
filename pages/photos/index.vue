@@ -5,7 +5,7 @@
 		v-if="photos?.length"
 	/>
 	<UILoading v-else message="Photos loading..." />
-
+	<div ref="observer" style="height: 1px; width: 100%"></div>
 	<!-- проверка реактивности стора -->
 	<!-- <button @click="photosStore.incrementStartIndex(10)">click</button> -->
 
@@ -17,15 +17,17 @@
 	import { useRouter } from 'vue-router';
 
 	import { usePhotosStore } from '@/stores/photosStore';
+	import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
 	import { storeToRefs } from 'pinia';
 
 	const router = useRouter();
-
 	const photosStore = usePhotosStore();
 
 	const { photos, startIndex, fetchError } = storeToRefs(photosStore);
+
+	const observer = ref<HTMLElement | null>(null);
 
 	console.log('BEFORE CALL_ONCE');
 
@@ -45,6 +47,8 @@
 		Второй вызов - уже после повторного вызова в хуке onMounted, т.к. данные на клиент не пришли с сервера.
 
 		=> Вотчер располагаем ПОСЛЕ await callOnce. И он сработает только в случае ошибки вызова, сделанного уже на клиенте.
+
+		А срабатывает вотчер при onMounted потому, что присваивается новый объект Error. А сравнение объектов идет по ссылке.
 	*/
 
 	watch(fetchError, (value) => {
@@ -60,6 +64,8 @@
 			photosStore.fetchPhotos();
 		}
 	});
+
+	useIntersectionObserver(observer, () => photosStore.incrementStartIndex(5));
 
 	console.log('AFTER CALL_ONCE');
 </script>

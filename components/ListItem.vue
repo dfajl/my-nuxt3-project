@@ -14,6 +14,8 @@
 		<div v-else-if="isPhoto(item) && componentUniqName === 'photos'">
 			Image URL:
 			{{ item.url }}
+			<br />
+			ID: {{ item.id }}
 		</div>
 	</div>
 </template>
