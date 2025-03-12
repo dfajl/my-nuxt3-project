@@ -6,7 +6,6 @@ export const usePhotosStore = defineStore('photosStore', () => {
 	const photos: Ref<Photo[]> = ref([]);
 	const limit = ref(5);
 	const startIndex = ref(0);
-	const computedStartIndex = computed(() => startIndex.value);
 	const fetchError: Ref<null | Error> = ref(null);
 
 	async function fetchPhotos() {
@@ -48,7 +47,6 @@ export const usePhotosStore = defineStore('photosStore', () => {
 
 	function incrementStartIndex(incrementedValue: number) {
 		startIndex.value = incrementedValue + startIndex.value;
-		/* startIndex.value += limit.value; */
 	}
 
 	watch(startIndex, (value) => {

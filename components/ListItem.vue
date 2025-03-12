@@ -2,14 +2,20 @@
 	<div :class="`${componentUniqName}-item`" @click="navigateToUser(item.id)">
 		<div v-if="isUser(item) && componentUniqName === 'users'">
 			{{ item.name }}
+			<br />
+			ID: {{ item.id }}
 		</div>
 		<div v-else-if="isComment(item) && componentUniqName === 'comments'">
 			Comment ID - {{ item.id }}
 			<br />
-			Comment email - {{ item.email }}
+			Comment email - {{ item.email }} ID: {{ item.id }}
+			<br />
+			ID: {{ item.id }}
 		</div>
 		<div v-else-if="isPost(item) && componentUniqName === 'posts'">
 			{{ item.title }}
+			<br />
+			ID: {{ item.id }}
 		</div>
 		<div v-else-if="isPhoto(item) && componentUniqName === 'photos'">
 			Image URL:
