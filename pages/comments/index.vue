@@ -2,7 +2,7 @@
 	<CommonList
 		component-uniq-name="comments"
 		component-uniq-type="postId"
-		:data="comments"
+		:data="sortedFilteredComments"
 		v-if="status === 'success' && comments?.length"
 	/>
 	<UILoading v-else message="Comments loading..." />
@@ -13,7 +13,13 @@
 	import type { Comment } from '@/types/FetchedData';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
+	import { useSortedFilteredData } from '@/hooks/useSortedFilteredData';
 	import { apiFetch } from '@/utils/customUseFetch';
+
+	export type InjectedSelectValue = 'name' | 'body' | 'email' | '';
+
+	const inputValue = inject<Ref<string | number>>('inputValue');
+	const selectedValue = inject<Ref<InjectedSelectValue>>('selectedValue');
 
 	const router = useRouter();
 
@@ -56,6 +62,13 @@
 		},
 	);
 
+	const sortedFilteredComments = useSortedFilteredData<Comment>(
+		comments,
+		inputValue!,
+		'email',
+		selectedValue!,
+	);
+
 	watch(error, (value: any) => {
 		if (value) {
 			alert('Sorry. Something went wrong!');
@@ -63,6 +76,19 @@
 			if (value instanceof Error) {
 				console.error('Ошибка API:', value.message);
 			}
+		}
+	});
+
+	onUnmounted(() => {
+		/* 
+			сбрасываем параметры поиска / сортировки 
+			при переходе на новую страницу 
+		*/
+		if (selectedValue) {
+			selectedValue.value = '';
+		}
+		if (inputValue) {
+			inputValue.value = '';
 		}
 	});
 </script>

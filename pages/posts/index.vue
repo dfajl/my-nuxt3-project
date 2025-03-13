@@ -2,7 +2,7 @@
 	<CommonList
 		component-uniq-name="posts"
 		component-uniq-type="userId"
-		:data="posts"
+		:data="sortedFilteredPosts"
 		v-if="posts?.length"
 	/>
 	<UILoading v-else message="Posts loading..." />
@@ -13,6 +13,13 @@
 	import { usePostsState } from '@/stores/postsStore';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
+	import { useSortedFilteredData } from '@/hooks/useSortedFilteredData';
+
+	import type { Post } from '@/types/FetchedData';
+	export type InjectedSelectValue = 'title' | 'body' | '';
+
+	const inputValue = inject<Ref<string | number>>('inputValue');
+	const selectedValue = inject<Ref<InjectedSelectValue>>('selectedValue');
 
 	const router = useRouter();
 	const { posts, error } = usePostsState();
@@ -34,10 +41,30 @@
 		Если же юзать await callOnce в script setup, то это делает под капотом Suspense.
 	*/
 
+	const sortedFilteredPosts = useSortedFilteredData<Post>(
+		posts,
+		inputValue!,
+		'title',
+		selectedValue!,
+	);
+
 	watch(error, (value) => {
 		if (value) {
 			alert('Sorry. Something went wrong!');
 			router.push('/');
+		}
+	});
+
+	onUnmounted(() => {
+		/* 
+			сбрасываем параметры поиска / сортировки 
+			при переходе на новую страницу 
+		*/
+		if (selectedValue) {
+			selectedValue.value = '';
+		}
+		if (inputValue) {
+			inputValue.value = '';
 		}
 	});
 </script>

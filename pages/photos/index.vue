@@ -1,8 +1,8 @@
 <template>
 	<CommonList
 		component-uniq-name="photos"
-		:data="photos"
-		v-if="photos?.length"
+		:data="sortedFilteredPhotos"
+		v-if="sortedFilteredPhotos?.length"
 	/>
 	<UILoading v-else message="Photos loading..." />
 	<div ref="observer" style="height: 1px; width: 100%"></div>
@@ -21,11 +21,18 @@
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
 	import { storeToRefs } from 'pinia';
+	import { useSortedFilteredData } from '@/hooks/useSortedFilteredData';
+	import type { Photo } from '@/types/FetchedData';
+
+	export type InjectedSelectValue = 'title' | 'url' | '';
+
+	const inputValue = inject<Ref<string | number>>('inputValue');
+	const selectedValue = inject<Ref<InjectedSelectValue>>('selectedValue');
 
 	const router = useRouter();
 	const photosStore = usePhotosStore();
 
-	const { photos, startIndex, fetchError } = storeToRefs(photosStore);
+	const { photos, fetchError } = storeToRefs(photosStore);
 
 	const observer = ref<HTMLElement | null>(null);
 
@@ -51,6 +58,13 @@
 		А срабатывает вотчер при onMounted потому, что присваивается новый объект Error. А сравнение объектов идет по ссылке.
 	*/
 
+	const sortedFilteredPhotos = useSortedFilteredData<Photo>(
+		photos,
+		inputValue!,
+		'url',
+		selectedValue!,
+	);
+
 	watch(fetchError, (value) => {
 		console.log('WATCHER');
 		if (value) {
@@ -68,6 +82,19 @@
 	useIntersectionObserver(observer, () => photosStore.incrementStartIndex(5));
 
 	console.log('AFTER CALL_ONCE');
+
+	onUnmounted(() => {
+		/* 
+			сбрасываем параметры поиска / сортировки 
+			при переходе на новую страницу 
+		*/
+		/* if (selectedValue) {
+			selectedValue.value = '';
+		}
+		if (inputValue) {
+			inputValue.value = '';
+		} */
+	});
 </script>
 
 <style lang="scss" scoped>

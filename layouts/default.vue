@@ -41,9 +41,52 @@
 				name: 'Без сортировки',
 			},
 		],
-		/* photos: [],
-		posts: [],
-		comments: [], */
+		photos: [
+			{
+				value: 'title',
+				name: 'По заголовку',
+			},
+			{
+				value: 'url',
+				name: 'По URL',
+			},
+			{
+				value: '',
+				name: 'Без сортировки',
+			},
+		],
+		posts: [
+			{
+				value: 'title',
+				name: 'По заголовку',
+			},
+			{
+				value: 'body',
+				name: 'По содержанию',
+			},
+			{
+				value: '',
+				name: 'Без сортировки',
+			},
+		],
+		comments: [
+			{
+				value: 'name',
+				name: 'По названию',
+			},
+			{
+				value: 'email',
+				name: 'По почте',
+			},
+			{
+				value: 'body',
+				name: 'По содержанию',
+			},
+			{
+				value: '',
+				name: 'Без сортировки',
+			},
+		],
 	};
 </script>
 

@@ -1,5 +1,10 @@
 <template>
-	<select v-bind="$attrs" v-model="modelValue" class="ui-select">
+	<select
+		v-bind="$attrs"
+		:value="modelValue"
+		@change="modelValue = ($event.target as HTMLInputElement).value"
+		class="ui-select"
+	>
 		<option
 			v-for="option in options[route.name as keyof typeof options]"
 			:key="option.value"

@@ -36,7 +36,11 @@ export const usePhotosStore = defineStore('photosStore', () => {
 
 			/* photos.value = [...photos.value, ...data]; */
 
-			photos.value = photos.value.concat(data);
+			if (photos.value.length) {
+				photos.value = toRaw(photos.value).concat(data);
+			} else {
+				photos.value = data;
+			}
 		} catch (error: unknown) {
 			console.log('CALLED_ERROR');
 			if (error instanceof Error) {
