@@ -4,6 +4,7 @@
 		component-uniq-type="postId"
 		:data="sortedFilteredComments"
 		v-if="status === 'success' && comments?.length"
+		@delete-item="deleteItem"
 	/>
 	<UILoading v-else message="Comments loading..." />
 </template>
@@ -68,6 +69,14 @@
 		'email',
 		selectedValue!,
 	);
+
+	const deleteItem = (item: Comment) => {
+		if (comments.value) {
+			comments.value = toRaw(comments.value).filter(
+				(comment) => comment.id !== item.id,
+			);
+		}
+	};
 
 	watch(error, (value: any) => {
 		if (value) {

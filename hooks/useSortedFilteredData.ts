@@ -22,14 +22,12 @@ export function useSortedFilteredData<
 		const search = String(inputValue?.value || '').toLowerCase();
 
 		dataCopy.sort((item1, item2) => {
-			console.log('sorting');
 			const a = String(item1[sortParam!.value] ?? '');
 			const b = String(item2[sortParam!.value] ?? '');
 			return a.localeCompare(b);
 		});
 
 		return dataCopy.filter((item: DataItemType) => {
-			console.log('filtering');
 			const fieldValue = String(item[filterParam] ?? '');
 			return fieldValue.toLowerCase().includes(search);
 		});

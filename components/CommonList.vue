@@ -5,6 +5,7 @@
 			:key="item.id"
 			:component-uniq-name="componentUniqName"
 			:item="item"
+			@delete-item="$emit('deleteItem', item)"
 		/>
 	</div>
 </template>

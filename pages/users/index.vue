@@ -4,6 +4,7 @@
 		component-uniq-type="username"
 		v-if="status === 'success' && users?.length"
 		:data="sortedFilteredUsers"
+		@delete-item="deleteItem"
 	/>
 	<UILoading v-else message="Users loading..." />
 </template>
@@ -36,6 +37,14 @@
 		'name',
 		selectedValue!,
 	);
+
+	const deleteItem = (item: User) => {
+		if (users.value) {
+			users.value = toRaw(users.value).filter(
+				(user) => user.id !== item.id,
+			);
+		}
+	};
 
 	watch(error, (value: any) => {
 		if (value) {
