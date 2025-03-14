@@ -1,10 +1,6 @@
 <template>
-	<div class="ui-inputs-wrapper">
-		<UIInput
-			v-if="route.path !== '/'"
-			v-model="inputValue"
-			placeholder="Search..."
-		/>
+	<div class="ui-inputs-wrapper" v-if="isNeedfulPath">
+		<UIInput v-model="inputValue" placeholder="Search..." />
 		<UISelect v-model="selectedValue" :options="sortOptions" />
 	</div>
 	<slot />
@@ -21,6 +17,15 @@
 	const selectedValue = ref('');
 	provide('inputValue', inputValue);
 	provide('selectedValue', selectedValue);
+
+	const isNeedfulPath = computed(() => {
+		return (
+			route.path === '/users' ||
+			route.path === '/comments' ||
+			route.path === '/posts' ||
+			route.path === '/photos'
+		);
+	});
 
 	const sortOptions = {
 		users: [

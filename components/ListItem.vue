@@ -10,7 +10,6 @@
 			<br />
 			Comment email - {{ item.email }} ID: {{ item.id }}
 			<br />
-			ID: {{ item.id }}
 		</div>
 		<div v-else-if="isPost(item) && componentUniqName === 'posts'">
 			{{ item.title }}
@@ -23,12 +22,17 @@
 			<br />
 			ID: {{ item.id }}
 		</div>
+		<UIButton width="20px" height="20px">
+			<UIIcon name="material-icons" color="white">close</UIIcon>
+		</UIButton>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import type { User, Comment, Post, Photo } from '@/types/FetchedData';
 	import { useRouter } from 'vue-router';
+	import UIButton from '@/components/UI/UIButton.vue';
+	import UIIcon from '@/components/UI/UIIcon.vue';
 
 	/* 
 		Вариант обобщенного тайп-предиката. Но он не корректный.

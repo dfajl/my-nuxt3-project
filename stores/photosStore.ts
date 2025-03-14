@@ -37,6 +37,12 @@ export const usePhotosStore = defineStore('photosStore', () => {
 			/* photos.value = [...photos.value, ...data]; */
 
 			if (photos.value.length) {
+				/* 
+					Данные, полученные до инфинити-скрола необходимо "разпроксировать", иначе
+					будет ошибка в useSortedFilteredData: так как сам массив с данными (верхнеуровневый)
+					я извлекаю из прокси, а вот вложенные первые объекты будут тоже обернуты в прокси
+					и получится вложенность из прокси => structuredClone не работает с прокси!
+				*/
 				photos.value = toRaw(photos.value).concat(data);
 			} else {
 				photos.value = data;
