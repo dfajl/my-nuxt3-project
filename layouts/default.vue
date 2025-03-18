@@ -34,6 +34,7 @@
 
 	provide('inputValue', inputValue);
 	provide('selectedValue', selectedValue);
+	provide('isDialogVisible', isDialogVisible);
 
 	const isNeedfulPath = computed(() => {
 		return (

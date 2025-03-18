@@ -88,12 +88,12 @@
 			сбрасываем параметры поиска / сортировки 
 			при переходе на новую страницу 
 		*/
-		/* if (selectedValue) {
+		if (selectedValue) {
 			selectedValue.value = '';
 		}
 		if (inputValue) {
 			inputValue.value = '';
-		} */
+		}
 	});
 </script>
 

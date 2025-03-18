@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="submitForm(currentRouteForm)">
+	<form @submit.prevent="handleSubmit(currentRouteForm)">
 		<h4>New {{ route.path.slice(1, route.path.length - 1) }}</h4>
 
 		<template v-if="route.name === 'users'">
@@ -144,11 +144,10 @@
 	import UIInput from './UI/UIInput.vue';
 	import UIButton from './UI/UIButton.vue';
 	import type { User, Comment, Post, Photo } from '@/types/FetchedData';
+
 	const route = useRoute();
-
-	const emit = defineEmits(['create']);
-
-	const props = defineProps<{}>();
+	const router = useRouter();
+	const isDialogVisible = inject<Ref<boolean>>('isDialogVisible');
 
 	const usersForm = ref<User>({
 		id: 0,
@@ -208,8 +207,8 @@
 
 	const submitForm = async (data: User | Comment | Post | Photo) => {
 		try {
-			await $fetch(
-				`https://jsonplaceholder.typicode.com/${String(route.name)}`,
+			const response = await $fetch.raw(
+				`xhttps://jsonplaceholder.typicode.com/${String(route.name)}`,
 				{
 					method: 'POST',
 					body: JSON.stringify(data),
@@ -218,11 +217,29 @@
 					},
 				},
 			);
-			resetForm(data);
+
+			return response;
 		} catch (err) {
 			if (err instanceof Error) {
 				console.error('Ошибка API:', err.message);
+				throw err;
 			}
+		}
+	};
+
+	const handleSubmit = async (data: User | Comment | Post | Photo) => {
+		try {
+			const response = await submitForm(data);
+
+			if (response?.status === 201) {
+				alert('Data was successfully created!');
+				resetForm(data);
+			}
+		} catch (err) {
+			alert('Sorry. Something went wrong!');
+			router.push('/');
+		} finally {
+			isDialogVisible!.value = false;
 		}
 	};
 
