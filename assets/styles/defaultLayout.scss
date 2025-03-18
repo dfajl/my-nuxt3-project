@@ -1,0 +1,20 @@
+.ui-components-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 20px;
+	width: 90%;
+	height: 32px;
+	border-radius: 5px;
+	margin-left: 15px;
+
+	.layoutBtn {
+		background: #bae7f671;
+		font-size: 14px;
+		color: #000000;
+		box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
+		&:hover {
+			background: #98e5ff;
+		}
+	}
+}

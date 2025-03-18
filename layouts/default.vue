@@ -1,20 +1,37 @@
 <template>
-	<div class="ui-inputs-wrapper" v-if="isNeedfulPath">
+	<div class="ui-components-wrapper" v-if="isNeedfulPath">
 		<UIInput v-model="inputValue" placeholder="Search..." />
 		<UISelect v-model="selectedValue" :options="sortOptions" />
+		<UIButton
+			width="20%"
+			height="100%"
+			class="layoutBtn"
+			@click="isDialogVisible = true"
+		>
+			Create new {{ route.path.slice(1) }}
+		</UIButton>
 	</div>
+	<UIModal v-model:show="isDialogVisible">
+		<template #mainContent>
+			<UIForm />
+		</template>
+	</UIModal>
 	<slot />
 </template>
 
 <script setup lang="ts">
 	import UIInput from '@/components/UI/UIInput.vue';
 	import UISelect from '@/components/UI/UISelect.vue';
+	import UIButton from '@/components/UI/UIButton.vue';
+	import UIModal from '@/components/UIModal.vue';
 
 	import { useRoute } from 'vue-router';
 	const route = useRoute();
 
 	const inputValue = ref('');
 	const selectedValue = ref('');
+	const isDialogVisible = ref<boolean>(false);
+
 	provide('inputValue', inputValue);
 	provide('selectedValue', selectedValue);
 
@@ -96,14 +113,5 @@
 </script>
 
 <style lang="scss" scoped>
-	.ui-inputs-wrapper {
-		display: flex;
-		align-items: center;
-		justify-content: start;
-		gap: 20px;
-		width: 90%;
-		padding: 5px;
-		border-radius: 5px;
-		margin-left: 15px;
-	}
+	@import '@/assets/styles/defaultLayout.scss';
 </style>

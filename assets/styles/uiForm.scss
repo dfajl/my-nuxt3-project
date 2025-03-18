@@ -1,0 +1,19 @@
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center;
+
+	.ui-input-form {
+		width: 70%;
+		box-shadow: none;
+		background: #cdcdcd;
+	}
+}
+
+.margin_btn {
+	margin-top: 10px;
+	width: 40%;
+	height: 30px;
+	align-self: center;
+}
