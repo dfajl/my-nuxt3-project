@@ -208,7 +208,7 @@
 	const submitForm = async (data: User | Comment | Post | Photo) => {
 		try {
 			const response = await $fetch.raw(
-				`xhttps://jsonplaceholder.typicode.com/${String(route.name)}`,
+				`https://jsonplaceholder.typicode.com/${String(route.name)}`,
 				{
 					method: 'POST',
 					body: JSON.stringify(data),

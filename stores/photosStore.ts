@@ -4,7 +4,7 @@ import type { Photo } from '@/types/FetchedData';
 export const usePhotosStore = defineStore('photosStore', () => {
 	console.log('PINIA_PHOTOS_INIT');
 	const photos: Ref<Photo[]> = ref([]);
-	const limit = ref(5);
+	const limit = ref(10);
 	const startIndex = ref(0);
 	const fetchError: Ref<null | Error> = ref(null);
 

@@ -79,7 +79,10 @@
 		}
 	});
 
-	useIntersectionObserver(observer, () => photosStore.incrementStartIndex(5));
+	useIntersectionObserver(
+		computed(() => observer.value),
+		() => photosStore.incrementStartIndex(10),
+	);
 
 	console.log('AFTER CALL_ONCE');
 
