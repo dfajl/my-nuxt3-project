@@ -6,14 +6,15 @@
 		v-if="posts?.length"
 	/>
 	<UILoading v-else message="Posts loading..." />
+	<div ref="observer" style="height: 1px; width: 100%"></div>
 </template>
 
 <script setup lang="ts">
-	import { useRouter } from 'vue-router';
-	import { usePostsState } from '@/stores/postsStore';
+	import { usePosts } from '@/hooks/usePosts';
 	import CommonList from '@/components/CommonList.vue';
 	import UILoading from '@/components/UI/UILoading.vue';
 	import { useSortedFilteredData } from '@/hooks/useSortedFilteredData';
+	import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 	import type { Post } from '@/types/FetchedData';
 	export type InjectedSelectValue = 'title' | 'body' | '';
@@ -21,25 +22,18 @@
 	const inputValue = inject<Ref<string | number>>('inputValue');
 	const selectedValue = inject<Ref<InjectedSelectValue>>('selectedValue');
 
-	const router = useRouter();
-	const { posts, error } = usePostsState();
+	const observer = ref<HTMLElement | null>(null);
 
-	/*
-		const posts = useState<Post[]>('posts');
-		await callOnce(async () => {
-			posts.value = await $fetch(
-				'https://jsonplaceholder.typicode.com/posts',
-			);
-		});
-	*/
+	const posts = useState<Post[]>('posts', () => []);
 
-	/* 
-		Это пример из доки.
-		Я же вынес это в компосабл. 
-		Т.к. callOnce в компосабле вызывается синхронно, то теперь const { posts } надо юзать с проверками на наличие значения.
+	const { startIndex, fetchPosts, incrementStartIndex } = usePosts();
 
-		Если же юзать await callOnce в script setup, то это делает под капотом Suspense.
-	*/
+	await callOnce(async () => {
+		const newPosts = await fetchPosts();
+		if (newPosts) {
+			posts.value = newPosts;
+		}
+	});
 
 	const sortedFilteredPosts = useSortedFilteredData<Post>(
 		posts,
@@ -48,17 +42,21 @@
 		selectedValue!,
 	);
 
-	watch(error, (value) => {
+	useIntersectionObserver(observer, () => incrementStartIndex(10));
+
+	watch(startIndex, async (value) => {
 		if (value) {
-			alert('Sorry. Something went wrong!');
-			router.push('/');
+			const newPosts = await fetchPosts();
+			if (newPosts) {
+				posts.value = toRaw(posts.value).concat(newPosts);
+			}
 		}
 	});
 
 	onUnmounted(() => {
-		/* 
-			сбрасываем параметры поиска / сортировки 
-			при переходе на новую страницу 
+		/*
+			сбрасываем параметры поиска / сортировки
+			при переходе на новую страницу
 		*/
 		if (selectedValue) {
 			selectedValue.value = '';

@@ -6,8 +6,6 @@
 	/>
 	<UILoading v-else message="Photos loading..." />
 	<div ref="observer" style="height: 1px; width: 100%"></div>
-	<!-- проверка реактивности стора -->
-	<!-- <button @click="photosStore.incrementStartIndex(10)">click</button> -->
 
 	<!-- убеждаемся, что при ошибке с клиента, запрос выполняется единожды -->
 	<!-- <button @click="() => photosStore.fetchPhotos()">click</button> -->
@@ -79,9 +77,8 @@
 		}
 	});
 
-	useIntersectionObserver(
-		computed(() => observer.value),
-		() => photosStore.incrementStartIndex(10),
+	useIntersectionObserver(observer, () =>
+		photosStore.incrementStartIndex(10),
 	);
 
 	console.log('AFTER CALL_ONCE');
