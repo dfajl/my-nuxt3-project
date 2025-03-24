@@ -17,7 +17,15 @@
 	);
 
 	if (!currentPost) {
-		router.push('/posts');
+		/* throw createError({
+			statusCode: 404,
+			statusMessage: `Post not found: ${route.params.id}`,
+		}); */
+		showError({
+			statusCode: 404,
+			statusMessage: `Post not found: ${route.params.id}`,
+		});
+		/* Работают идентично */
 	}
 </script>
 
